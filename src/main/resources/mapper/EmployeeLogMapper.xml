@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoqu.weixin.repositories.EmployeeLogMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoqu.weixin.models.EmployeeLog" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="empno" property="empno" jdbcType="VARCHAR" />
+    <result column="empname" property="empname" jdbcType="VARCHAR" />
+    <result column="actionlog" property="actionlog" jdbcType="VARCHAR" />
+    <result column="os" property="os" jdbcType="VARCHAR" />
+    <result column="browse" property="browse" jdbcType="VARCHAR" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xiaoqu.weixin.models.EmployeeLog" >
+    insert into xq_employeelog (id, empno, empname, 
+      actionlog, os, browse, 
+      ip, updatetime)
+    values (#{id,jdbcType=INTEGER}, #{empno,jdbcType=VARCHAR}, #{empname,jdbcType=VARCHAR}, 
+      #{actionlog,jdbcType=VARCHAR}, #{os,jdbcType=VARCHAR}, #{browse,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoqu.weixin.models.EmployeeLog" >
+    insert into xq_employeelog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="empno != null" >
+        empno,
+      </if>
+      <if test="empname != null" >
+        empname,
+      </if>
+      <if test="actionlog != null" >
+        actionlog,
+      </if>
+      <if test="os != null" >
+        os,
+      </if>
+      <if test="browse != null" >
+        browse,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empno != null" >
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="empname != null" >
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="actionlog != null" >
+        #{actionlog,jdbcType=VARCHAR},
+      </if>
+      <if test="os != null" >
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="browse != null" >
+        #{browse,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

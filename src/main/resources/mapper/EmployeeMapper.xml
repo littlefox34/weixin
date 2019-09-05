@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaoqu.weixin.repositories.EmployeeMapper">
+  <resultMap id="BaseResultMap" type="com.xiaoqu.weixin.models.Employee">
+    <result column="id" jdbcType="INTEGER" property="id" />
+    <result column="empno" jdbcType="VARCHAR" property="empno" />
+    <result column="avater" jdbcType="VARCHAR" property="avater" />
+    <result column="empname" jdbcType="VARCHAR" property="empname" />
+    <result column="emppass" jdbcType="VARCHAR" property="emppass" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="lastlogintime" jdbcType="TIMESTAMP" property="lastlogintime" />
+    <result column="lastloginip" jdbcType="VARCHAR" property="lastloginip" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xiaoqu.weixin.models.Employee">
+    insert into xq_employee (id, empno, avater, 
+      empname, emppass, status, 
+      updatetime, createtime, lastlogintime, 
+      lastloginip)
+    values (#{id,jdbcType=INTEGER}, #{empno,jdbcType=VARCHAR}, #{avater,jdbcType=VARCHAR}, 
+      #{empname,jdbcType=VARCHAR}, #{emppass,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{createtime,jdbcType=TIMESTAMP}, #{lastlogintime,jdbcType=TIMESTAMP}, 
+      #{lastloginip,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoqu.weixin.models.Employee">
+    insert into xq_employee
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="empno != null">
+        empno,
+      </if>
+      <if test="avater != null">
+        avater,
+      </if>
+      <if test="empname != null">
+        empname,
+      </if>
+      <if test="emppass != null">
+        emppass,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="lastlogintime != null">
+        lastlogintime,
+      </if>
+      <if test="lastloginip != null">
+        lastloginip,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="empno != null">
+        #{empno,jdbcType=VARCHAR},
+      </if>
+      <if test="avater != null">
+        #{avater,jdbcType=VARCHAR},
+      </if>
+      <if test="empname != null">
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="emppass != null">
+        #{emppass,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastlogintime != null">
+        #{lastlogintime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastloginip != null">
+        #{lastloginip,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByEmpname" resultMap="BaseResultMap">
+    SELECT id,empno,avater,empname,emppass,`status`,updatetime,createtime,lastlogintime,lastloginip FROM xq_employee WHERE
+        xq_employee.empname = #{username,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByEmpno" resultMap="BaseResultMap">
+    SELECT id,empno,avater,empname,emppass,`status`,updatetime,createtime,lastlogintime,lastloginip FROM xq_employee WHERE
+        xq_employee.empno = #{code,jdbcType=VARCHAR}
+  </select>
+</mapper>

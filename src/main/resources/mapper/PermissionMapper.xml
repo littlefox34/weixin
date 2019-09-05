@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoqu.weixin.repositories.PermissionMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoqu.weixin.models.Permission" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="authname" property="authname" jdbcType="VARCHAR" />
+    <result column="authno" property="authno" jdbcType="VARCHAR" />
+    <result column="authsign" property="authsign" jdbcType="VARCHAR" />
+    <result column="parentno" property="parentno" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xiaoqu.weixin.models.Permission" >
+    insert into xq_permission (id, authname, authno, 
+      authsign, parentno, status, 
+      updatetime, sort)
+    values (#{id,jdbcType=INTEGER}, #{authname,jdbcType=VARCHAR}, #{authno,jdbcType=VARCHAR}, 
+      #{authsign,jdbcType=VARCHAR}, #{parentno,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoqu.weixin.models.Permission" >
+    insert into xq_permission
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authname != null" >
+        authname,
+      </if>
+      <if test="authno != null" >
+        authno,
+      </if>
+      <if test="authsign != null" >
+        authsign,
+      </if>
+      <if test="parentno != null" >
+        parentno,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="authname != null" >
+        #{authname,jdbcType=VARCHAR},
+      </if>
+      <if test="authno != null" >
+        #{authno,jdbcType=VARCHAR},
+      </if>
+      <if test="authsign != null" >
+        #{authsign,jdbcType=VARCHAR},
+      </if>
+      <if test="parentno != null" >
+        #{parentno,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="selectByEmpno" parameterType="java.lang.String" resultType="com.xiaoqu.weixin.models.Permission">
+      SELECT
+Auth.id,
+Auth.authname,
+Auth.authno,
+Auth.authsign,
+Auth.parentno,
+Auth.`status`,
+Auth.updatetime,
+Auth.sort
+FROM
+xq_permission AS Auth
+INNER JOIN xq_position_permission AS PosAuth ON PosAuth.authno = Auth.authno
+INNER JOIN xq_employee_position AS EmpPos ON EmpPos.posno = PosAuth.posno
+WHERE
+EmpPos.empno =  #{code,jdbcType=VARCHAR}
+  </select>
+</mapper>

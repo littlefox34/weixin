@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.xiaoqu.weixin.repositories.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.xiaoqu.weixin.models.Department" >
+    <result column="id" property="id" jdbcType="INTEGER" />
+    <result column="dptname" property="dptname" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="BIT" />
+    <result column="dptno" property="dptno" jdbcType="VARCHAR" />
+    <result column="parentno" property="parentno" jdbcType="VARCHAR" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="sort" property="sort" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.xiaoqu.weixin.models.Department" >
+    insert into xq_department (id, dptname, status, 
+      dptno, parentno, updatetime, 
+      sort)
+    values (#{id,jdbcType=INTEGER}, #{dptname,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, 
+      #{dptno,jdbcType=VARCHAR}, #{parentno,jdbcType=VARCHAR}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{sort,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.xiaoqu.weixin.models.Department" >
+    insert into xq_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="dptname != null" >
+        dptname,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="dptno != null" >
+        dptno,
+      </if>
+      <if test="parentno != null" >
+        parentno,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="sort != null" >
+        sort,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dptname != null" >
+        #{dptname,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="dptno != null" >
+        #{dptno,jdbcType=VARCHAR},
+      </if>
+      <if test="parentno != null" >
+        #{parentno,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sort != null" >
+        #{sort,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
